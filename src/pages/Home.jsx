@@ -13,7 +13,7 @@ const Home = () => {
     return (
         <>
             {/* Hero section */}
-            <section className="">
+            <section className="mb-10">
                 <Swiper
                     modules={[Autoplay, Pagination, Navigation]}
                     spaceBetween={0}
@@ -42,7 +42,7 @@ const Home = () => {
                                             <p className='text-center'>
                                                 {item.description}
                                             </p>
-                                            <Button text='View Recipe' height='h-[40px]'/>
+                                            <Button text='View Recipe' height='h-[40px]' />
                                         </div>
                                     </div>
                                 </SwiperSlide>
@@ -52,6 +52,56 @@ const Home = () => {
 
                 </Swiper>
             </section>
+
+            <div className='px-[3vw]'>
+                {/* Trending Recipes */}
+                <section className='mb-10'>
+                    <h2 className='text-xl sm:text-2xl mb-6'>Trending Recipes</h2>
+                    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 items-center'>
+                        <div className='h-[150px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[150px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[150px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[150px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[150px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[150px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[150px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[150px] w-full rounded-lg bg-red-500'></div>
+                    </div>
+                </section>
+
+                {/* Quick meal */}
+                <section className='mb-10'>
+                    <h2 className='text-xl sm:text-2xl mb-6'>Quick Meals</h2>
+                    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 items-center'>
+                        <div className='h-[200px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[200px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[200px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[200px] w-full rounded-lg bg-red-500'></div>
+                    </div>
+                </section>
+
+                {/* For the kids */}
+                <section className='mb-10'>
+                    <h2 className='text-xl sm:text-2xl mb-6'>For The Kids</h2>
+                    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 items-center'>
+                        <div className='h-[200px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[200px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[200px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[200px] w-full rounded-lg bg-red-500'></div>
+                    </div>
+                </section>
+
+                {/* Vegan */}
+                <section className='mb-10'>
+                    <h2 className='text-xl sm:text-2xl mb-6'>Vegan</h2>
+                    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 items-center'>
+                        <div className='h-[200px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[200px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[200px] w-full rounded-lg bg-red-500'></div>
+                        <div className='h-[200px] w-full rounded-lg bg-red-500'></div>
+                    </div>
+                </section>
+            </div>
         </>
     );
 };

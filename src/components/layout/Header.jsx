@@ -6,7 +6,7 @@ import { CgProfile } from "react-icons/cg";
 
 const Header = () => {
     return (
-        <header className="sticky inset-x-0 top-0 z-50 py-4 px-[3vw] flex justify-between shadow-md text-base text-text-primary">
+        <header className="fixed inset-x-0 top-0 z-50 py-4 px-[3vw] flex justify-between text-base text-text-primary">
             <div className="">
                 <a href="/">
                     <svg version="1.1" viewBox="0 0 2048 503" width="120" height="" xmlns="http://www.w3.org/2000/svg">

@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className='px-[3vw]'>
+      <main className=''>
         <Home />
       </main>
     </>

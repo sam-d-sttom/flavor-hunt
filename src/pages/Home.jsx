@@ -22,7 +22,7 @@ const Home = () => {
                     pagination={{ clickable: true }}
                     navigation
                     loop
-                    className="w-full h-screen"
+                    className="w-full h-[400px]"
                 >
                     {/* Each slide must be wrapped in a SwiperSlide component */}
                     {
@@ -35,7 +35,7 @@ const Home = () => {
                                         }}
                                     >
                                         <div className="absolute inset-0 bg-black opacity-50"></div>
-                                        <div className="relative z-10 text-text-primary flex flex-col items-center gap-y-4 text-center w-[80vw]">
+                                        <div className="relative z-10 text-primary-color flex flex-col items-center gap-y-4 text-center w-[80vw]">
                                             <h2 className='text-3xl sm:text-3xl'>
                                                 {item.name.toUpperCase()}
                                             </h2>

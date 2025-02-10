@@ -65,7 +65,7 @@ export const Footer = () => {
                     <p className="text-sm">
                         <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a> | <a href="/cookies">Cookie Policy</a>
                     </p>
-                    <p className="text-sm mt-2">© 2023 Recipe Platform. All rights reserved.</p>
+                    <p className="text-sm mt-2">© 2025 Flavor Hunt. All rights reserved.</p>
                 </div>
             </div>
         </footer>

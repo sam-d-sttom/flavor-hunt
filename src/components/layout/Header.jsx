@@ -7,27 +7,9 @@ import { useEffect, useState } from "react";
 
 const Header = () => {
 
-    const [headerBackground, setHeaderBackground] = useState("transparent");
-
-    useEffect(() => {
-        window.addEventListener("scroll", function () {
-
-            if (window.scrollY > 10) { // Change background after 10px scroll
-                setHeaderBackground("#F5EDE0");
-            } else {
-                setHeaderBackground("transparent");
-            }
-        });
-    }, [])
-
-
 
     return (
-        <header className="fixed inset-x-0 top-0 z-50 py-4 px-[3vw] flex justify-between text-base text-text-primary"
-            style={{
-                backgroundColor: headerBackground,
-                transition: "background 0.3s ease-in-out"
-            }}
+        <header className="sticky inset-x-0 top-0 z-50 py-4 px-[3vw] flex justify-between text-base text-primary-color bg-header-bg"
         >
             <div className="">
                 <a href="/">

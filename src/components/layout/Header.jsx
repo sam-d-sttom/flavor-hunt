@@ -3,10 +3,32 @@ import Button from "../common/Button";
 import SearchBar from "../common/SearchBar";
 import { IoIosSearch } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+
+    const [headerBackground, setHeaderBackground] = useState("transparent");
+
+    useEffect(() => {
+        window.addEventListener("scroll", function () {
+
+            if (window.scrollY > 10) { // Change background after 10px scroll
+                setHeaderBackground("#F5EDE0");
+            } else {
+                setHeaderBackground("transparent");
+            }
+        });
+    }, [])
+
+
+
     return (
-        <header className="fixed inset-x-0 top-0 z-50 py-4 px-[3vw] flex justify-between text-base text-text-primary">
+        <header className="fixed inset-x-0 top-0 z-50 py-4 px-[3vw] flex justify-between text-base text-text-primary"
+            style={{
+                backgroundColor: headerBackground,
+                transition: "background 0.3s ease-in-out"
+            }}
+        >
             <div className="">
                 <a href="/">
                     <svg version="1.1" viewBox="0 0 2048 503" width="120" height="" xmlns="http://www.w3.org/2000/svg">
@@ -77,8 +99,8 @@ const Header = () => {
             </div>
 
             <div className="text-3xl text-black flex gap-x-4 items-center lg:hidden">
-                <IoIosSearch className="md:hidden"/>
-                <CgProfile className="lg:hidden"/>
+                <IoIosSearch className="md:hidden" />
+                <CgProfile className="lg:hidden" />
             </div>
         </header>
     )

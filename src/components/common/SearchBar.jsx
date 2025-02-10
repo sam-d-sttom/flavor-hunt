@@ -7,6 +7,7 @@ const SearchBar = () => {
         type="text"
         placeholder="Search recipes"
         className="text-black text-sm grow border-2 border-border-color border-solid rounded-l-lg py-2 px-4 focus:outline-none border-r-0 h-[35px]"
+        required
       />
       <Button
         text="Search"

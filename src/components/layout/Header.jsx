@@ -9,7 +9,7 @@ const Header = () => {
 
 
     return (
-        <header className="sticky inset-x-0 top-0 z-50 py-4 px-[3vw] flex justify-between text-base text-primary-color bg-header-bg"
+        <header className="sticky inset-x-0 top-0 z-[10] py-4 px-[3vw] flex justify-between text-base text-primary-color bg-header-bg"
         >
             <div className="">
                 <a href="/">
@@ -78,6 +78,9 @@ const Header = () => {
             <div className="flex gap-x-4 hidden lg:flex h-[35px]">
                 <Button text="Login" />
                 <Button text="Sign Up" />
+                {/* <div className="bg-button-bg w-[35px] h-[35px] rounded-full flex justify-around items-center">
+                    <CgProfile className="text-2xl" />
+                </div> */}
             </div>
 
             <div className="text-3xl text-black flex gap-x-4 items-center lg:hidden">

@@ -18,7 +18,7 @@ export const Login = ({ onClose }) => {
         e.preventDefault();
 
         // check if form has been submitted/
-        if(isFormSubmitted){
+        if (isFormSubmitted) {
             return;
         }
 
@@ -48,7 +48,13 @@ export const Login = ({ onClose }) => {
             console.log(response);
         }).catch(error => {
             setIsFormSubmitted(false);
-            console.log(error)
+            if (error.status === 500 || error.code === "ERR_NETWORK" || error.code === "ERR_BAD_RESPONSE") {
+                console.log("NETWORK ERROR");
+            } else if (error.response.status === 401) {
+
+                console.log("WRONG CREDENTIALS");
+
+            }
         })
     }
 

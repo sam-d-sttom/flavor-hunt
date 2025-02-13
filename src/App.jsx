@@ -39,9 +39,9 @@ function App() {
       <Header onLoginClick={handleLoginClick} onSignUpClick={handleSignUpClick} />
       <Nav />
       <main className=''>
-        <Routes location={state?.backgroundLocation || { pathname: "/" }}>
+        <Routes location={state?.backgroundLocation}>
           <Route path='/' element={<Home />}/>
-          <Route path='/collections/' element={<Collections />}/>
+          <Route path='/collections' element={<Collections />}/>
         </Routes>
         
         {location.pathname === "/login" && <Login onClose={handleClose} />}

@@ -1,18 +1,11 @@
 import FormButton from "../components/common/FormButton";
 import LoginWithGoogle from "../components/common/LoginWithGoogle";
-import { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
+import usePreventBodyScrolling from "../utils/usePreventBodyScroling";
 
 export const SignUp = ({ onClose }) => {
-    useEffect(() => {
-        // Prevent scrolling when the sign-up page is displayed
-        document.body.classList.add('overflow-hidden');
-
-        return () => {
-            // Allow scrolling when the sign-up page is hidden
-            document.body.classList.remove('overflow-hidden');
-        };
-    }, []);
+    //prevents body scroling when component renders.
+    usePreventBodyScrolling();
 
     return (
         <section className="fixed inset-0 z-[20] bg-overlay-bg overflow-y-scroll">

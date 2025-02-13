@@ -1,12 +1,56 @@
-import Button from "../components/common/Button";
 import FormButton from "../components/common/FormButton";
 import LoginWithGoogle from "../components/common/LoginWithGoogle";
-import { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import usePreventBodyScrolling from "../utils/usePreventBodyScroling";
+import axios from "axios";
+import { useState } from "react";
 
 export const Login = ({ onClose }) => {
+    //prevents body scroling when component renders.
     usePreventBodyScrolling();
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
+    // login user
+    function attemptLogin(e) {
+        e.preventDefault();
+
+        // check if form has been submitted/
+        if(isFormSubmitted){
+            return;
+        }
+
+        setIsFormSubmitted(true);
+
+        setUsername(username.trim());
+        setPassword(password.trim());
+
+        //Check if username and password is inputed
+        if (username.length === 0 || password.length === 0) {
+            return console.log("FORM INCOMPLETELY FILLED");
+        }
+
+        //Check if username or email is correctly inputed
+        if (username.includes(' ')) {
+            return console.log("WRONG USER NAME OR EMAIL FORMAT");
+        }
+
+        const loginData = {
+            'login': username,
+            password
+        };
+
+        // make request
+        axios.post('http://127.0.0.1:8000/api/user/login', loginData).then(response => {
+            setIsFormSubmitted(false);
+            console.log(response);
+        }).catch(error => {
+            setIsFormSubmitted(false);
+            console.log(error)
+        })
+    }
 
     return (
         <section className="fixed inset-0 z-[20] bg-overlay-bg overflow-y-scroll">
@@ -80,7 +124,8 @@ export const Login = ({ onClose }) => {
                         </div>
                     </header>
 
-                    <form className="mb-4 h-[80%]">
+                    {/* Login form */}
+                    <form onSubmit={attemptLogin} className="mb-4 h-[80%]">
                         {/* Input div */}
                         <div className="h-[90%] overflow-y-scroll px-6">
                             <div className="flex flex-col mb-4">
@@ -90,6 +135,8 @@ export const Login = ({ onClose }) => {
                                     type="text"
                                     placeholder="Username or Email"
                                     required
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
                                 />
                             </div>
 
@@ -100,6 +147,8 @@ export const Login = ({ onClose }) => {
                                     type="password"
                                     placeholder="Password"
                                     required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -110,6 +159,7 @@ export const Login = ({ onClose }) => {
                                 width="w-full"
                                 height="h-[35px]"
                                 text="Login"
+                                isFormSubmitted={isFormSubmitted}
                             />
                         </div>
                     </form>

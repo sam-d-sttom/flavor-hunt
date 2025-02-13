@@ -42,6 +42,7 @@ function App() {
         <Routes location={state?.backgroundLocation}>
           <Route path='/' element={<Home />}/>
           <Route path='/collections' element={<Collections />}/>
+          <Route path='/login' element={<Login />}/>
         </Routes>
         
         {location.pathname === "/login" && <Login onClose={handleClose} />}

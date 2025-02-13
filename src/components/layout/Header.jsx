@@ -76,12 +76,12 @@ const Header = ({ onLoginClick, onSignUpClick }) => {
             <SearchBar />
 
             <div className="flex gap-x-4 hidden lg:flex h-[35px]">
-                <button onClick={onLoginClick}>
+                <div onClick={onLoginClick}>
                     <Button text="Login" />
-                </button>
-                <button onClick={onSignUpClick}>
+                </div>
+                <div onClick={onSignUpClick}>
                     <Button text="Sign Up" />
-                </button>
+                </div>
             </div>
 
             <div className="text-3xl text-black flex gap-x-4 items-center lg:hidden">

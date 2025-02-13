@@ -3,6 +3,7 @@
 @theme {
   /* colors */
   --color-bg: #F5EDE0;
+  --color-overlay-bg: #0000008a;
   --color-bg-dark: #2A211C;
   /* --color-header-bg: #E3C6B8; */
   --color-header-bg: #F5EDE0;
@@ -15,4 +16,30 @@
 
   /* font sizes */
 }
+
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+  /* display: none; */
+}
+
+*::-webkit-scrollbar-track {
+  background: #f1f1f100;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
 

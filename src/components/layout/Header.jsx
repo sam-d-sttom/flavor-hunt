@@ -5,7 +5,7 @@ import { IoIosSearch } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { useEffect, useState } from "react";
 
-const Header = () => {
+const Header = ({ onLoginClick, onSignUpClick }) => {
 
 
     return (
@@ -76,11 +76,12 @@ const Header = () => {
             <SearchBar />
 
             <div className="flex gap-x-4 hidden lg:flex h-[35px]">
-                <Button text="Login" />
-                <Button text="Sign Up" />
-                {/* <div className="bg-button-bg w-[35px] h-[35px] rounded-full flex justify-around items-center">
-                    <CgProfile className="text-2xl" />
-                </div> */}
+                <button onClick={onLoginClick}>
+                    <Button text="Login" />
+                </button>
+                <button onClick={onSignUpClick}>
+                    <Button text="Sign Up" />
+                </button>
             </div>
 
             <div className="text-3xl text-black flex gap-x-4 items-center lg:hidden">

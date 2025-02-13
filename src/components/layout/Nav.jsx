@@ -3,6 +3,7 @@ import { MdExplore } from "react-icons/md";
 import { FaNewspaper } from "react-icons/fa6";
 import { BsCollectionFill } from "react-icons/bs";
 import { IoCreate } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export const Nav = () => {
     return (
@@ -25,9 +26,9 @@ export const Nav = () => {
                     </a>
                 </li>
                 <li title="Collections" className="cursor-pointer">
-                    <a href="#collections">
+                    <Link to="/collections">
                         <BsCollectionFill />
-                    </a>
+                    </Link>
                 </li>
                 <li title="Create" className="cursor-pointer">
                     <a href="#create">

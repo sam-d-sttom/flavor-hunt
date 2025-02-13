@@ -1,19 +1,25 @@
-import Button from "../components/common/Button";
 import FormButton from "../components/common/FormButton";
 import LoginWithGoogle from "../components/common/LoginWithGoogle";
 import { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
-import usePreventBodyScrolling from "../utils/usePreventBodyScroling";
 
-export const Login = ({ onClose }) => {
-    usePreventBodyScrolling();
+export const SignUp = ({ onClose }) => {
+    useEffect(() => {
+        // Prevent scrolling when the sign-up page is displayed
+        document.body.classList.add('overflow-hidden');
+
+        return () => {
+            // Allow scrolling when the sign-up page is hidden
+            document.body.classList.remove('overflow-hidden');
+        };
+    }, []);
 
     return (
         <section className="fixed inset-0 z-[20] bg-overlay-bg overflow-y-scroll">
             <div className="h-full min-h-[500px] flex justify-around items-center">
                 {/* Form main div */}
-                <div className="z-[100] w-[400px] rounded-lg shadow-2xl py-10 px-1 bg-bg relative">
-                    <header>
+                <div className="z-[100] h-[500px] w-[400px] rounded-lg shadow-2xl py-10 px-1 bg-bg relative">
+                    <header className="">
                         <div className="absolute top-2 left-2">
                             <button className="cursor-pointer" onClick={onClose}>
                                 <IoClose />
@@ -76,19 +82,49 @@ export const Login = ({ onClose }) => {
                                 <path transform="translate(378,54)" d="m0 0 3 1-4 4h-2l2-4z" fill="#757575" />
                                 <path transform="translate(1054,404)" d="m0 0" fill="#fff" />
                             </svg>
-                            <h3>LOGIN TO YOUR ACCOUNT</h3>
+                            <h3>CREATE AN ACCOUNT</h3>
                         </div>
                     </header>
 
-                    <form className="mb-4 h-[80%]">
+                    <form className="mb-4 h-[60%]">
                         {/* Input div */}
                         <div className="h-[90%] overflow-y-scroll px-6">
                             <div className="flex flex-col mb-4">
-                                <label className="pb-1">Username or Email</label>
+                                <label className="pb-1">Username</label>
                                 <input
                                     className="text-black text-sm w-full border-2 border-border-color border-solid rounded-lg py-2 px-4 focus:outline-none h-[35px]"
                                     type="text"
-                                    placeholder="Username or Email"
+                                    placeholder="Username"
+                                    required
+                                />
+                            </div>
+
+                            <div className="flex flex-col mb-4">
+                                <label className="pb-1">Last Name</label>
+                                <input
+                                    className="text-black text-sm w-full border-2 border-border-color border-solid rounded-lg py-2 px-4 focus:outline-none h-[35px]"
+                                    type="text"
+                                    placeholder="Last Name"
+                                    required
+                                />
+                            </div>
+
+                            <div className="flex flex-col mb-4">
+                                <label className="pb-1">First Name</label>
+                                <input
+                                    className="text-black text-sm w-full border-2 border-border-color border-solid rounded-lg py-2 px-4 focus:outline-none h-[35px]"
+                                    type="text"
+                                    placeholder="First Name"
+                                    required
+                                />
+                            </div>
+
+                            <div className="flex flex-col mb-4">
+                                <label className="pb-1">Email</label>
+                                <input
+                                    className="text-black text-sm w-full border-2 border-border-color border-solid rounded-lg py-2 px-4 focus:outline-none h-[35px]"
+                                    type="email"
+                                    placeholder="Email"
                                     required
                                 />
                             </div>
@@ -102,6 +138,16 @@ export const Login = ({ onClose }) => {
                                     required
                                 />
                             </div>
+
+                            <div className="flex flex-col mb-4">
+                                <label className="pb-1">Confirm Password</label>
+                                <input
+                                    className="text-black text-sm w-full border-2 border-border-color border-solid rounded-lg py-2 px-4 focus:outline-none h-[35px]"
+                                    type="password"
+                                    placeholder="Confirm Password"
+                                    required
+                                />
+                            </div>
                         </div>
 
                         {/* Submit button for form */}
@@ -109,7 +155,7 @@ export const Login = ({ onClose }) => {
                             <FormButton
                                 width="w-full"
                                 height="h-[35px]"
-                                text="Login"
+                                text="Sign Up"
                             />
                         </div>
                     </form>
@@ -129,4 +175,4 @@ export const Login = ({ onClose }) => {
     );
 }
 
-export default Login;
+export default SignUp;

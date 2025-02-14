@@ -5,8 +5,8 @@ import Button from "../common/Button";
 
 export const Footer = () => {
     return (
-        <footer className="bg-footer-bg text-soft-white py-12">
-            <div className="container mx-auto px-4">
+        <footer className="bg-footer-bg text-soft-white py-12 flex justify-around px-[10vw]">
+            <div className="">
                 {/* Quick Links */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
                     <div>

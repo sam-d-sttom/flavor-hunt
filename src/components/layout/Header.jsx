@@ -3,9 +3,8 @@ import Button from "../common/Button";
 import SearchBar from "../common/SearchBar";
 import { IoIosSearch } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
-import { useEffect, useState } from "react";
 
-const Header = ({ onLoginClick, onSignUpClick }) => {
+const Header = ({ onLoginClick, onSignUpClick, isUserLoggedIn }) => {
 
 
     return (
@@ -75,18 +74,31 @@ const Header = ({ onLoginClick, onSignUpClick }) => {
 
             <SearchBar />
 
-            <div className="flex gap-x-4 hidden lg:flex h-[35px]">
-                <div onClick={onLoginClick}>
-                    <Button text="Login" />
-                </div>
-                <div onClick={onSignUpClick}>
-                    <Button text="Sign Up" />
-                </div>
-            </div>
+            {
+                isUserLoggedIn ?
+                    <div className="flex justify-around items-center h-[35px] w-[35px] bg-button-bg rounded-full cursor-pointer">
+                        <CgProfile className="text-2xl text-primary-color" />
+                    </div>
+                    :
+
+                    <div className="flex gap-x-4 hidden lg:flex h-[35px]">
+                        <div onClick={onLoginClick}>
+                            <Button text="Login" />
+                        </div>
+                        <div onClick={onSignUpClick}>
+                            <Button text="Sign Up" />
+                        </div>
+                    </div>
+            }
+
+
+
 
             <div className="text-3xl text-black flex gap-x-4 items-center lg:hidden">
                 <IoIosSearch className="md:hidden" />
-                <CgProfile className="lg:hidden" />
+                <div className="flex justify-around items-center h-[35px] w-[35px] bg-button-bg rounded-full cursor-pointer">
+                    <CgProfile className="text-2xl text-primary-color" />
+                </div>
             </div>
         </header>
     )

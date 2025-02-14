@@ -5,14 +5,15 @@ import Footer from './components/layout/Footer';
 import Nav from './components/layout/Nav';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
-import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import Collections from './pages/Collections';
+import { useSelector } from 'react-redux';
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const isUserLoggedIn = useSelector(state=>state.user.isUserLoggedIn);
 
   const handleLoginClick = () => {
     navigate("/login", { state: { backgroundLocation: location } });
@@ -36,7 +37,11 @@ function App() {
 
   return (
     <>
-      <Header onLoginClick={handleLoginClick} onSignUpClick={handleSignUpClick} />
+      <Header 
+      onLoginClick={handleLoginClick} 
+      onSignUpClick={handleSignUpClick} 
+      isUserLoggedIn={isUserLoggedIn}
+      />
       <Nav />
       <main className=''>
         <Routes location={state?.backgroundLocation || (location.pathname === "/login" || location.pathname === "/sign-up" ? {pathname: "/"} : location)}>

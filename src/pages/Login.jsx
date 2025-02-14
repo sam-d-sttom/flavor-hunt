@@ -3,7 +3,11 @@ import LoginWithGoogle from "../components/common/LoginWithGoogle";
 import { IoClose } from "react-icons/io5";
 import usePreventBodyScrolling from "../utils/usePreventBodyScroling";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateIsUserLoggedIn, setUserNameAndEmail } from "../redux/features/user/userSlice";
+import { useNavigate } from "react-router-dom";
+
 
 export const Login = ({ onClose }) => {
     //prevents body scroling when component renders.
@@ -12,6 +16,10 @@ export const Login = ({ onClose }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
+    const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     // login user
     function attemptLogin(e) {
@@ -37,6 +45,7 @@ export const Login = ({ onClose }) => {
             return console.log("WRONG USER NAME OR EMAIL FORMAT");
         }
 
+        // post data
         const loginData = {
             'login': username,
             password
@@ -45,16 +54,32 @@ export const Login = ({ onClose }) => {
         // make request
         axios.post('http://127.0.0.1:8000/api/user/login', loginData).then(response => {
             setIsFormSubmitted(false);
-            console.log(response);
+            
+            if(response.status === 200){
+                const token = response.data.data?.token;
+                const username = response.data.data?.username;
+                const email = response.data.data?.email;
+
+                dispatch(updateIsUserLoggedIn(true));
+                dispatch(setUserNameAndEmail({
+                    username,
+                    email
+                }));
+                
+            }
+
+            // send user back to previous page.
+            navigate(-1);
+            
         }).catch(error => {
             setIsFormSubmitted(false);
             if (error.status === 500 || error.code === "ERR_NETWORK" || error.code === "ERR_BAD_RESPONSE") {
                 console.log("NETWORK ERROR");
-            } else if (error.response.status === 401) {
-
+            } else if (error.status === 401) {
                 console.log("WRONG CREDENTIALS");
 
             }
+            console.log(error)
         })
     }
 

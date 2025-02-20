@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateIsUserLoggedIn, setUserNameAndEmail } from "../redux/features/user/userSlice";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export const Login = ({ onClose }) => {
@@ -52,10 +53,9 @@ export const Login = ({ onClose }) => {
         };
 
         // make request
-        axios.post('http://127.0.0.1:8000/api/user/login', loginData).then(response => {
-            setIsFormSubmitted(false);
-            
-            if(response.status === 200){
+        axios.post('https://flavor-hunt-backend-git-main-sam-d-sttoms-projects.vercel.app/api/api/user/login', loginData).then(response => {
+
+            if (response.status === 200) {
                 const token = response.data.data?.token;
                 const username = response.data.data?.username;
                 const email = response.data.data?.email;
@@ -65,11 +65,25 @@ export const Login = ({ onClose }) => {
                     username,
                     email
                 }));
-                
+
             }
 
+            
+            toast.info('login successful', {
+                position: "bottom-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+            });
+            
             // send user back to previous page.
             navigate(-1);
+            setIsFormSubmitted(false);
             
         }).catch(error => {
             setIsFormSubmitted(false);
@@ -206,6 +220,19 @@ export const Login = ({ onClose }) => {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+
         </section>
     );
 }

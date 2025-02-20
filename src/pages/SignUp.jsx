@@ -2,10 +2,123 @@ import FormButton from "../components/common/FormButton";
 import LoginWithGoogle from "../components/common/LoginWithGoogle";
 import { IoClose } from "react-icons/io5";
 import usePreventBodyScrolling from "../utils/usePreventBodyScroling";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const SignUp = ({ onClose }) => {
     //prevents body scroling when component renders.
     usePreventBodyScrolling();
+
+    const [username, setUsername] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
+    const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+
+    // Sign up user
+    function attemptSignUp(e) {
+        e.preventDefault();
+
+        // check if form has been submitted/
+        if (isFormSubmitted) {
+            return;
+        }
+
+        setIsFormSubmitted(true);
+        
+        setUsername(username.trim());
+        setLastName(lastName.trim());
+        setFirstName(firstName.trim());
+        setEmail(email.trim());
+        setPassword(password.trim());
+        setConfirmPassword(confirmPassword.trim());
+        
+        // Check if details is set
+        if (username.length === 0 || lastName.length === 0 || firstName.length === 0 || email.length === 0 || password.length === 0 || confirmPassword.length === 0) {
+            setIsFormSubmitted(false);
+            return console.log("Fill up details");
+        }
+        
+        //Regular expression to check if the user name provided contains only contain letters, numbers, underscores, and hyphens.
+        const userNameRegex = /^(?![.-])(?!.*[_.-]{2})[a-zA-Z0-9._-]{3,30}(?<![.-])$/;
+        
+        //Check if username is correctly set
+        if (!userNameRegex.test(username)) {
+            setIsFormSubmitted(false);
+            return console.log("WRONG USER NAME FORMAT");
+        }
+        
+        //Regular expression to check if the last name is properly set.
+        const nameRegex = /^(?!.*[\'-]{2})(?!.*\s{2})[a-zA-ZÀ-ÖØ-öø-ÿ]+(?:[\'-][a-zA-ZÀ-ÖØ-öø-ÿ]+)?(?:\s[a-zA-ZÀ-ÖØ-öø-ÿ]+(?:[\'-][a-zA-ZÀ-ÖØ-öø-ÿ]+)?)?$/;
+        
+        //Check if last name is correctly set
+        if (!nameRegex.test(lastName)) {
+            setIsFormSubmitted(false);
+            return console.log("WRONG LAST NAME FORMAT");
+        }
+        
+        //Check if first name is correctly set
+        if (!nameRegex.test(firstName)) {
+            setIsFormSubmitted(false);
+            return console.log("WRONG FIRST NAME FORMAT");
+        }
+        
+        
+        //Reular expression to check if the password provided is accepted
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,64}$/;
+        
+        if (!passwordRegex.test(password)) {
+            setIsFormSubmitted(false);
+            
+            return console.log("WRONG PASSWORD FORMAT");
+        }
+        
+        
+        if (password !== confirmPassword) {
+            setIsFormSubmitted(false);
+            
+            return console.log("Password does'nt match confirmation password");
+        }
+
+        // post data
+        const signUpData = {
+            username,
+            'last_name': lastName,
+            'first_name': firstName,
+            email,
+            password,
+        };
+
+
+        // make request
+        axios.post('https://flavor-hunt-backend-git-main-sam-d-sttoms-projects.vercel.app/api/api/user/create', signUpData).then(response => {
+            setIsFormSubmitted(false);
+
+            if (response.status === 201) {
+                // send user back to previous page.
+                navigate(-1);
+            }
+
+
+        }).catch(error => {
+            setIsFormSubmitted(false);
+            if (error.status === 500 || error.code === "ERR_NETWORK" || error.code === "ERR_BAD_RESPONSE") {
+                console.log("NETWORK ERROR");
+            } else if (error.status === 401) {
+                console.log("WRONG CREDENTIALS");
+
+            }
+            console.log(error)
+        })
+    }
 
     return (
         <section className="fixed inset-0 z-[20] bg-overlay-bg overflow-y-scroll">
@@ -79,7 +192,7 @@ export const SignUp = ({ onClose }) => {
                         </div>
                     </header>
 
-                    <form className="mb-4 h-[60%]">
+                    <form onSubmit={attemptSignUp} className="mb-4 h-[60%]">
                         {/* Input div */}
                         <div className="h-[90%] overflow-y-scroll px-6">
                             <div className="flex flex-col mb-4">
@@ -89,6 +202,8 @@ export const SignUp = ({ onClose }) => {
                                     type="text"
                                     placeholder="Username"
                                     required
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
                                 />
                             </div>
 
@@ -99,6 +214,8 @@ export const SignUp = ({ onClose }) => {
                                     type="text"
                                     placeholder="Last Name"
                                     required
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
                                 />
                             </div>
 
@@ -109,6 +226,8 @@ export const SignUp = ({ onClose }) => {
                                     type="text"
                                     placeholder="First Name"
                                     required
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
                                 />
                             </div>
 
@@ -119,6 +238,8 @@ export const SignUp = ({ onClose }) => {
                                     type="email"
                                     placeholder="Email"
                                     required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
 
@@ -129,6 +250,8 @@ export const SignUp = ({ onClose }) => {
                                     type="password"
                                     placeholder="Password"
                                     required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
 
@@ -139,6 +262,8 @@ export const SignUp = ({ onClose }) => {
                                     type="password"
                                     placeholder="Confirm Password"
                                     required
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -149,6 +274,7 @@ export const SignUp = ({ onClose }) => {
                                 width="w-full"
                                 height="h-[35px]"
                                 text="Sign Up"
+                                isFormSubmitted={isFormSubmitted}
                             />
                         </div>
                     </form>

@@ -8,12 +8,13 @@ import SignUp from './pages/SignUp';
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import Collections from './pages/Collections';
 import { useSelector } from 'react-redux';
+import { Bounce, ToastContainer } from 'react-toastify';
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isUserLoggedIn = useSelector(state=>state.user.isUserLoggedIn);
+  const isUserLoggedIn = useSelector(state => state.user.isUserLoggedIn);
 
   const handleLoginClick = () => {
     navigate("/login", { state: { backgroundLocation: location } });
@@ -26,10 +27,10 @@ function App() {
   const handleClose = () => {
     if (location.state?.backgroundLocation) {
       // Go back to the previous page
-      navigate(-1); 
+      navigate(-1);
     } else {
       // If no background location, go to home page
-      navigate("/"); 
+      navigate("/");
     }
   };
 
@@ -37,22 +38,35 @@ function App() {
 
   return (
     <>
-      <Header 
-      onLoginClick={handleLoginClick} 
-      onSignUpClick={handleSignUpClick} 
-      isUserLoggedIn={isUserLoggedIn}
+      <Header
+        onLoginClick={handleLoginClick}
+        onSignUpClick={handleSignUpClick}
+        isUserLoggedIn={isUserLoggedIn}
       />
       <Nav />
       <main className=''>
-        <Routes location={state?.backgroundLocation || (location.pathname === "/login" || location.pathname === "/sign-up" ? {pathname: "/"} : location)}>
-          <Route path='/' element={<Home />}/>
-          <Route path='/collections' element={<Collections />}/>
+        <Routes location={state?.backgroundLocation || (location.pathname === "/login" || location.pathname === "/sign-up" ? { pathname: "/" } : location)}>
+          <Route path='/' element={<Home />} />
+          <Route path='/collections' element={<Collections />} />
         </Routes>
-        
+
         {location.pathname === "/login" && <Login onClose={handleClose} />}
         {location.pathname === "/sign-up" && <SignUp onClose={handleClose} />}
       </main>
       <Footer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
     </>
   )
 }

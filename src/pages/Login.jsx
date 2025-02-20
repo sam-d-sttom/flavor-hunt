@@ -78,9 +78,9 @@ export const Login = ({ onClose }) => {
                 draggable: true,
                 progress: undefined,
                 theme: "dark",
-                transition: Bounce,
             });
             
+            console.log("navigates")
             // send user back to previous page.
             navigate(-1);
             setIsFormSubmitted(false);
